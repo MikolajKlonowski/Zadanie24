@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en" xmls:th="http://www.thymeleaf.org"
+      xmlns:th="http://www.w3.org/1999/xhtml" xmlns:xmls="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Formularz książek</title>
+</head>
+
+<body>
+
+<form action="dodajKsiazke" method="post" th:object="${nowaKsiazka}">
+    Podaj ISBN:<input type="number" th:field="*{isbn}" value="isbn"/><br>
+    Podaj tytuł: <input type="text" th:field="*{tytul}" value="tytul"/><br>
+    Podaj date wydania: <input type="date" th:field="*{dataWydania}" value="dataWydania"/><br>
+    <!--Wybierz kategorie: <input type="text" th:field="*{kategoria}" value="kategoria"/><br>-->
+    <select  th:field="*{kategoria}">
+        <option th:each="kategoria: ${wszystkieKategorie}" th:text="${kategoria}" th:value="${kategoria}"></option>
+    </select><br>
+    <INPUT type="submit" value="Dodaj!"/>
+
+
+</form>
+
+<table>
+    <thead>
+    <tr>
+        <th>ISBN   </th>
+        <th>Tytuł        </th>
+        <th>Kategoria</th>
+        <th>Data wydania</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="book: ${listaKsiazek}">
+        <th th:text="${book.isbn}"></th>
+        <th th:text="${book.tytul}"></th>
+        <th th:text="${book.kategoria}"></th>
+        <th th:text="${book.dataWydania}"></th>
+    </tr>
+    </tbody>
+</table>
+
+
+
+</body>
+
+</html>
